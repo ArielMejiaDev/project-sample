@@ -17,7 +17,7 @@ use Illuminate\Testing\TestResponse;
  */
 class AssertResource
 {
-    public function assertResource(): Closure
+    public function __invoke(): Closure
     {
         return function (JsonResource $resource) {
             /** @var \Illuminate\Testing\TestResponse $this */
