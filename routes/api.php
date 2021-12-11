@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\API\ArticleController;
-use App\Http\Controllers\API\ArticleSearchController;
+use App\Http\Controllers\API\Articles\ArticleController;
+use App\Http\Controllers\API\Articles\ArticleSearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

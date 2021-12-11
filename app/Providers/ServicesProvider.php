@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\API\ArticleSearchController;
+use App\Http\Controllers\API\Articles\ArticleSearchController;
 use App\Http\Queries\ArticleQuery;
 use Illuminate\Support\ServiceProvider;
 use Spatie\QueryBuilder\QueryBuilder;
