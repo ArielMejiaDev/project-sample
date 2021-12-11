@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\SoftDeletable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,9 +25,14 @@ use Illuminate\Support\Str;
 class Article extends Model
 {
     use HasFactory;
+    use SoftDeletable;
 
     protected $fillable = [
         'slug', 'title', 'content', 'thumbnail', 'author_id'
+    ];
+
+    public array $softDeletableIdentifiers = [
+        'title'
     ];
 
     public function setSlugAttribute($value)

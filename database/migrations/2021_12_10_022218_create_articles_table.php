@@ -16,6 +16,7 @@ class CreateArticlesTable extends Migration
             $table->text('thumbnail')->nullable();
             $table->unsignedBigInteger('author_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

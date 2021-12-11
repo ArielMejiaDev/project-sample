@@ -88,9 +88,46 @@ class ArticleTest extends TestCase
         $response->assertSuccessful()
             ->assertNoContent();
 
-        $this->assertDatabaseMissing(Article::class, [
-            'id' => $article->id,
+        $this->assertEquals(
+            Article::query()->onlyTrashed()->first()->id,
+            $article->id
+        );
+    }
+
+    /** @test */
+    public function it_tests_soft_deletes_with_rename_feature(): void
+    {
+        $titleName = 'A day in life of Doe';
+
+        /** @var Article $article */
+        $article = Article::factory()->create([
+            'title' => $titleName,
+            'author_id' => $this->user->id,
         ]);
+
+        $response = $this->actingAs($this->user)
+            ->deleteJson(route('articles.destroy', $article));
+
+        $response->assertNoContent();
+
+        $this->assertEquals(
+            Article::query()->onlyTrashed()->first()->title,
+            "{$titleName} - deleted"
+        );
+
+        /** @var Article $article */
+        $anotherArticle = Article::factory()->create([
+            'title' => $titleName,
+            'author_id' => $this->user->id,
+        ]);
+
+        $anotherResponse = $this->actingAs($this->user)
+            ->deleteJson(route('articles.destroy', $anotherArticle));
+
+        $this->assertEquals(
+            Article::query()->onlyTrashed()->find(2)->title,
+            "{$titleName} - deleted 2"
+        );
     }
 
     /**
