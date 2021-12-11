@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Builders\ArticleBuilder;
+use App\Traits\Relationships\BelongsToAnAuthor;
 use App\Traits\SoftDeletable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,8 +26,14 @@ use Illuminate\Support\Str;
  */
 class Article extends Model
 {
+    use BelongsToAnAuthor;
     use HasFactory;
     use SoftDeletable;
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new ArticleBuilder($query);
+    }
 
     protected $fillable = [
         'slug', 'title', 'content', 'thumbnail', 'author_id'
@@ -38,29 +46,5 @@ class Article extends Model
     public function makeSlug($value): string
     {
         return Str::slug($value);
-    }
-
-    public function setSlugAttribute($value)
-    {
-        $this->attributes['slug'] = strtolower($value);
-    }
-
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function scopeInsensitiveTitleSearch(Builder $query, $value): Builder
-    {
-        return $query->where(function ($query) use ($value) {
-            $query->where('title', 'LIKE', '%' . ucfirst($value) . '%')
-                ->orWhere('title', 'LIKE', '%' . strtoupper($value) . '%')
-                ->orWhere('title', 'LIKE', '%' . strtolower($value) . '%');
-        });
-    }
-
-    public function scopeByAuthor(Builder $query, $authorId): Builder
-    {
-        return $query->where('author_id', $authorId);
     }
 }
