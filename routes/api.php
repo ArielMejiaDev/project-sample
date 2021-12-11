@@ -20,8 +20,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-require_once('auth.php');
-
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('articles', ArticleController::class)->except(['index', 'show']);
 });

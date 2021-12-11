@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +14,10 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $token = $request->user()->createToken($request->user()->id);
+        /** @var User $user */
+        $user = $request->user();
 
-        return ['token' => $token->plainTextToken];
+        return $user->createPlainTextToken();
     }
 
     /**

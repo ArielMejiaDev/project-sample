@@ -64,4 +64,11 @@ class User extends Authenticatable
     {
         return $this->role == Role::ADMIN;
     }
+
+    public function createPlainTextToken(): array
+    {
+        return [
+            'token' => $this->createToken($this->id)->plainTextToken
+        ];
+    }
 }
