@@ -50,7 +50,7 @@ class ArticleTest extends TestCase
         $response = $this->actingAs($this->user)
             ->postJson(route('articles.store'), $article->toArray());
 
-        $resource = ArticleResource::make($article->load('author'));
+        $resource = ArticleResource::make(Article::query()->first()->load('author'));
 
         $response->assertResource($resource);
     }
@@ -80,7 +80,9 @@ class ArticleTest extends TestCase
     public function it_tests_articles_delete(): void
     {
         /** @var Article $article */
-        $article = Article::factory()->create();
+        $article = Article::factory()->create([
+            'author_id' => $this->user->id,
+        ]);
 
         $response = $this->actingAs($this->user)
             ->deleteJson(route('articles.destroy', $article));
@@ -128,6 +130,36 @@ class ArticleTest extends TestCase
             Article::query()->onlyTrashed()->find(2)->title,
             "{$titleName} - deleted 2"
         );
+    }
+
+    /** @test */
+    public function it_tests_update_policy(): void
+    {
+        $article = Article::factory()->create();
+
+        $newData = Article::factory()->make([
+            'author_id' => $this->admin->id,
+        ]);
+
+        $response = $this->actingAs($this->user)
+            ->putJson(route('articles.update', $article), $newData->toArray());
+
+        $response->assertForbidden();
+    }
+
+    /** @test */
+    public function it_tests_delete_policy(): void
+    {
+        $article = Article::factory()->create();
+
+        $newData = Article::factory()->make([
+            'author_id' => $this->admin->id,
+        ]);
+
+        $response = $this->actingAs($this->user)
+            ->putJson(route('articles.update', $article), $newData->toArray());
+
+        $response->assertForbidden();
     }
 
     /**

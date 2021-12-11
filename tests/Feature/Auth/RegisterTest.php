@@ -24,6 +24,6 @@ class RegisterTest extends TestCase
 
         $response = $this->postJson(route('api.register'), $userData);
 
-        $response->assertSuccessful()->dump();
+        $response->assertSuccessful();
     }
 }
