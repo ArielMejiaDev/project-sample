@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\API\ArticleSearchController;
+use App\Http\Queries\ArticleQuery;
 use App\Models\Article;
 use App\Observers\ArticleObserver;
 use Illuminate\Support\ServiceProvider;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AppServiceProvider extends ServiceProvider
 {

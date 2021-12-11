@@ -35,6 +35,11 @@ class Article extends Model
         'title'
     ];
 
+    public function makeSlug($value): string
+    {
+        return Str::slug($value);
+    }
+
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = strtolower($value);
@@ -45,13 +50,17 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeInsensitiveTitleSearch(Builder $query, $value): Builder
+    {
+        return $query->where(function ($query) use ($value) {
+            $query->where('title', 'LIKE', '%' . ucfirst($value) . '%')
+                ->orWhere('title', 'LIKE', '%' . strtoupper($value) . '%')
+                ->orWhere('title', 'LIKE', '%' . strtolower($value) . '%');
+        });
+    }
+
     public function scopeByAuthor(Builder $query, $authorId): Builder
     {
         return $query->where('author_id', $authorId);
-    }
-
-    public function makeSlug($value): string
-    {
-        return Str::slug($value);
     }
 }
