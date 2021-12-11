@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ArticleBuilder extends Builder
 {
+    // Accessors & Mutators
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = strtolower($value);
     }
 
+    // Scopes
     public function insensitiveTitleSearch($value): self
     {
         return $this->where(function ($query) use ($value) {
@@ -31,5 +33,11 @@ class ArticleBuilder extends Builder
     public function published(): self
     {
         return $this->whereNotNull('published_at');
+    }
+
+    // Prunes
+    public function prunable(): self
+    {
+        return $this->whereNull('published_at');
     }
 }

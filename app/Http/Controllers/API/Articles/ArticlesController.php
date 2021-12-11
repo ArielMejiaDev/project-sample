@@ -17,30 +17,38 @@ class ArticlesController extends Controller
     public function __construct(Article $article)
     {
         $this->article = $article;
-        $this->authorizeResource(Article::class, 'article');
+
+        $this->authorizeResource(Article::class, 'article', [
+            'except' => [ 'index', 'show' ]
+        ]);
     }
 
     public function index(): ArticleResourceCollection
     {
-        $articles = $this->article->newQuery()->with('author')->paginate();
+        $articles = $this->article->newQuery()->with('author')->paginate()->appends('published_at_for_humans');
         return ArticleResource::collection($articles);
     }
 
     public function store(StoreArticleRequest $request): ArticleResource
     {
-        $article = $request->user()->articles()->create($request->validated());
+        $article = $request->user()
+            ->articles()
+            ->create($request->validated());
+
         return ArticleResource::make($article);
     }
 
     public function show(Article $article): ArticleResource
     {
-        return ArticleResource::make($article->load('author'));
+        $article->append('published_at_for_humans')->load('author');
+        return ArticleResource::make($article);
     }
 
     public function update(UpdateArticleRequest $request, Article $article): ArticleResource
     {
         $article->update($request->validated());
-        return ArticleResource::make($article->load('author'));
+        $article->append('published_at_for_humans')->load('author');
+        return ArticleResource::make($article);
     }
 
     public function destroy(Article $article): Response

@@ -20,6 +20,11 @@ class UserSeeder extends Seeder
 
         $userFactory->editor()->create();
 
+        $userFactory->user()->create([
+            'name' => 'Normal user',
+            'email' => 'user@mail.com',
+        ]);
+
         $userFactory->user()->count(20)->create();
     }
 }

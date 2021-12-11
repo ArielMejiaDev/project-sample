@@ -16,6 +16,7 @@ class ArticleFactory extends Factory
             'content' => $this->faker->realText,
             'thumbnail' => $this->faker->imageUrl,
             'author_id' => User::factory(),
+            'published_at' => now(),
         ];
     }
 }

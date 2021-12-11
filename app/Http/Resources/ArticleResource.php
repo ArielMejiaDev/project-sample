@@ -15,6 +15,8 @@ class ArticleResource extends JsonResource
             'content' => $this->resource->content,
             'thumbnail' => $this->resource->thumbnail,
             'author' => UserResource::make($this->resource->author),
+            'published_at' => $this->resource->published_at,
+            'published_at_for_humans' => $this->resource->published_at_for_humans,
         ];
     }
 }
