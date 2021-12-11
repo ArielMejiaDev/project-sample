@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Models\Article;
+namespace Tests\Feature\Models\Articles;
 
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;

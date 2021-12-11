@@ -10,7 +10,7 @@ use App\Models\Article;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection as ArticleResourceCollection;
 use Illuminate\Http\Response;
 
-class ArticleController extends Controller
+class ArticlesController extends Controller
 {
     protected Article $article;
 

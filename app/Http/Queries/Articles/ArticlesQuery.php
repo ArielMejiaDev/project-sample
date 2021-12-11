@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Queries;
+namespace App\Http\Queries\Articles;
 
 use App\Models\Article;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ArticleQuery extends QueryBuilder
+class ArticlesQuery extends QueryBuilder
 {
     public function __construct()
     {

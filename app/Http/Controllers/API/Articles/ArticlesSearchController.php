@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\API\Articles;
 
 use App\Http\Controllers\Controller;
-use App\Http\Queries\ArticleQuery;
 use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection as ArticleResourceCollection;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ArticleSearchController extends Controller
+class ArticlesSearchController extends Controller
 {
     protected QueryBuilder $articlesQuery;
 
