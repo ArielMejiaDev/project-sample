@@ -2,6 +2,7 @@
 
 namespace App\Macros\Collection;
 
+use Closure;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
@@ -18,7 +19,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
  */
 class Paginate
 {
-    public function __invoke()
+    public function __invoke(): Closure
     {
         return function (int $perPage = 15, string $pageName = 'page', int $page = null, int $total = null, array $options = []): LengthAwarePaginator {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
