@@ -6,10 +6,12 @@ use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tests\Traits\InteractsWithModels;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+    use InteractsWithModels;
 
     protected Authenticatable $admin;
     protected Authenticatable $editor;

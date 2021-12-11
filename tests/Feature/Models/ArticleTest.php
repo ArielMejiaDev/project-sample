@@ -37,6 +37,7 @@ class ArticleTest extends TestCase
         $response = $this->actingAs($this->user)->getJson(route('articles.show', $article));
 
         $resource = ArticleResource::make($article->load('author'));
+
         $response->assertResource($resource);
     }
 
@@ -46,9 +47,11 @@ class ArticleTest extends TestCase
         /** @var Article $article */
         $article = Article::factory()->make(['author_id' => $this->user->id]);
 
-        $response = $this->actingAs($this->user)->postJson(route('articles.store'), $article->toArray());
+        $response = $this->actingAs($this->user)
+            ->postJson(route('articles.store'), $article->toArray());
 
         $resource = ArticleResource::make($article->load('author'));
+
         $response->assertResource($resource);
     }
 
@@ -61,7 +64,8 @@ class ArticleTest extends TestCase
         /** @var Article $newData */
         $newData = Article::factory()->make(['author_id' => $this->user->id]);
 
-        $response = $this->actingAs($this->user)->putJson(route('articles.update', $article), $newData->toArray());
+        $response = $this->actingAs($this->user)
+            ->putJson(route('articles.update', $article), $newData->toArray());
 
         $article->refresh();
 
@@ -69,11 +73,7 @@ class ArticleTest extends TestCase
 
         $response->assertResource($resource);
 
-        $companyModelFields = collect(array_flip($article->getFillable()));
-
-        $companyModelFields->each(
-            fn ($field) => $this->assertEquals($article->{$field}, $newData->{$field})
-        );
+        $this->assertModelEquals($newData, $article);
     }
 
     /** @test */
@@ -82,7 +82,8 @@ class ArticleTest extends TestCase
         /** @var Article $article */
         $article = Article::factory()->create();
 
-        $response = $this->actingAs($this->user)->deleteJson(route('articles.destroy', $article));
+        $response = $this->actingAs($this->user)
+            ->deleteJson(route('articles.destroy', $article));
 
         $response->assertSuccessful()
             ->assertNoContent();
@@ -98,7 +99,8 @@ class ArticleTest extends TestCase
      */
     public function it_tests_articles_validation($invalidData, $invalidFields): void
     {
-        $response = $this->actingAs($this->user)->postJson(route('articles.store'), $invalidData);
+        $response = $this->actingAs($this->user)
+            ->postJson(route('articles.store'), $invalidData);
 
         $response->assertUnprocessable()
             ->assertJsonValidationErrors($invalidFields);
