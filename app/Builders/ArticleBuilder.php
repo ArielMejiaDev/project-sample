@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ArticleBuilder extends Builder
 {
-    // Accessors & Mutators
+    // Mutators
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = strtolower($value);

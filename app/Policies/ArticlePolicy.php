@@ -27,7 +27,7 @@ class ArticlePolicy
 
     public function update(User $user, Article $article): bool
     {
-        return $article->author_id == $user->id;
+        return $article->author_id == $user->id || $user->isAdmin();
     }
 
     public function delete(User $user, Article $article): bool

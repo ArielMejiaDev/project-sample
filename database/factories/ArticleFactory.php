@@ -19,4 +19,24 @@ class ArticleFactory extends Factory
             'published_at' => now(),
         ];
     }
+
+    /** Indicate that the model's publish_at column is null.*/
+    public function unpublished(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published' => false,
+            ];
+        });
+    }
+
+    /** Indicate that the model's publish_at column has a timestamp value.*/
+    public function published(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published' => true,
+            ];
+        });
+    }
 }

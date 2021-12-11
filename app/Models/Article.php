@@ -5,10 +5,10 @@ namespace App\Models;
 use App\Builders\ArticleBuilder;
 use App\Traits\Relationships\BelongsToAnAuthor;
 use App\Traits\SoftDeletable;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 /**
@@ -46,15 +46,26 @@ class Article extends Model
         'title'
     ];
 
-    public function makeSlug($value): string
-    {
-        return Str::slug($value);
-    }
-
     public function getPublishedAtForHumansAttribute($key)
     {
         if ($this->published_at) {
             return $this->attributes['published_at_for_humans'] = $this->published_at->diffForHumans();
         }
+    }
+
+    public function makeSlug($value): string
+    {
+        return Str::slug($value);
+    }
+
+    public function makePublishedAt(): ?Carbon
+    {
+        $publishedAt = null;
+
+        if (request()->input('published')) {
+            $publishedAt = now();
+        }
+
+        return $publishedAt;
     }
 }
