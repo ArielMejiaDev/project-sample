@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Builders;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class ArticleBuilder extends Builder
@@ -22,9 +23,9 @@ class ArticleBuilder extends Builder
         });
     }
 
-    public function byAuthor($authorId): self
+    public function byAuthor(User $author): self
     {
-        return $this->where('author_id', $authorId);
+        return $this->where('author_id', $author->id);
     }
 
     public function published(): self

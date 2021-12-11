@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Articles\ArticlesController;
+use App\Http\Controllers\API\Articles\ArticlesOwnedController;
 use App\Http\Controllers\API\Articles\ArticlesSearchController;
 use App\Http\Controllers\API\Articles\ArticlesTrashedController;
 use Illuminate\Http\Request;
@@ -22,10 +23,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('articles/owned', ArticlesOwnedController::class)->name('articles.owned');
+    Route::get('articles/trashed', ArticlesTrashedController::class)->name('articles.trashed');
     Route::apiResource('articles', ArticlesController::class)->except(['index', 'show']);
 });
 
 Route::get('articles/search', ArticlesSearchController::class)->name('articles.search');
-Route::get('articles/trashed', ArticlesTrashedController::class)->name('articles.trashed');
 Route::get('articles', [ArticlesController::class, 'index'])->name('articles.index');
 Route::get('articles/{article:slug}', [ArticlesController::class, 'show'])->name('articles.show');

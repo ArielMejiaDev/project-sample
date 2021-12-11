@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\API\Articles\ArticlesOwnedController;
 use App\Http\Controllers\API\Articles\ArticlesSearchController;
 use App\Http\Controllers\API\Articles\ArticlesTrashedController;
+use App\Http\Queries\Articles\ArticlesOwnedQuery;
 use App\Http\Queries\Articles\ArticlesQuery;
 use App\Http\Queries\Articles\ArticlesTrashedQuery;
 use App\Http\Queries\EloquentQuery;
@@ -22,5 +24,8 @@ class ServicesProvider extends ServiceProvider
             ->needs(EloquentQuery::class)
             ->give(ArticlesTrashedQuery::class);
 
+        $this->app->when(ArticlesOwnedController::class)
+            ->needs(EloquentQuery::class)
+            ->give(ArticlesOwnedQuery::class);
     }
 }

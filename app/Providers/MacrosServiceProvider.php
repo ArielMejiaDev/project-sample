@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Macros\Collection\Paginate;
 use Illuminate\Pagination\AbstractPaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 
 class MacrosServiceProvider extends ServiceProvider
@@ -33,5 +35,7 @@ class MacrosServiceProvider extends ServiceProvider
             $resource = ['data' => json_decode($resource->toJson(), 1)];
             return $this->assertExactJson($resource);
         });
+
+        Collection::macro('paginate', app(Paginate::class)());
     }
 }

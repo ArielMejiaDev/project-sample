@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ArticleSearchTest extends TestCase
+class ArticlesSearchTest extends TestCase
 {
     use RefreshDatabase;
 
