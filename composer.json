@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
-        "arielmejiadev/laravel-model-translator": "dev-master",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
@@ -61,11 +60,5 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../packages/laravel-model-translator"
-        }
-    ]
+    "prefer-stable": true
 }

@@ -4,73 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "450cf0879c717d6e43b150fefd393c8f",
+    "content-hash": "a09ef426d4c69f98d39f6a8ce20af18b",
     "packages": [
-        {
-            "name": "arielmejiadev/laravel-model-translator",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../packages/laravel-model-translator",
-                "reference": "618828c99faa6342f17be526394ffd8e46107f20"
-            },
-            "require": {
-                "illuminate/support": "^8.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ArielMejiaDev\\LaravelModelTranslator\\LaravelModelTranslatorServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaravelModelTranslator": "ArielMejiaDev\\LaravelModelTranslator\\LaravelModelTranslatorFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ArielMejiaDev\\LaravelModelTranslator\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "ArielMejiaDev\\LaravelModelTranslator\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ],
-                "test-coverage": [
-                    "vendor/bin/phpunit --coverage-html coverage"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ariel Mejia Dev",
-                    "email": "arielmejiadev@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Package to add translation fields to any laravel eloquent model.",
-            "homepage": "https://github.com/arielmejiadev/laravel-model-translator",
-            "keywords": [
-                "arielmejiadev",
-                "laravel-model-translator"
-            ],
-            "transport-options": {
-                "relative": true
-            }
-        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",
@@ -8100,9 +8035,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "arielmejiadev/laravel-model-translator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
