@@ -32,7 +32,7 @@ class ArticlesTest extends TestCase
     public function it_tests_articles_show(): void
     {
         /** @var Article $article */
-        $article = Article::factory()->create(['author_id' => $this->user->id]);
+        $article = Article::factory()->for($this->user, 'author')->create();
 
         $response = $this->actingAs($this->user)->getJson(route('articles.show', $article));
 
@@ -45,7 +45,7 @@ class ArticlesTest extends TestCase
     public function it_tests_articles_store(): void
     {
         /** @var Article $article */
-        $article = Article::factory()->make(['author_id' => $this->user->id]);
+        $article = Article::factory()->for($this->user, 'author')->make();
 
         $response = $this->actingAs($this->user)
             ->postJson(route('articles.store'), $article->toArray());
@@ -59,7 +59,7 @@ class ArticlesTest extends TestCase
     public function it_tests_articles_update(): void
     {
         /** @var Article $article */
-        $article = Article::factory()->create(['author_id' => $this->user->id]);
+        $article = Article::factory()->for($this->user, 'author')->create();
 
         /** @var Article $newData */
         $newData = Article::factory()->make(['author_id' => $this->user->id]);
@@ -80,9 +80,7 @@ class ArticlesTest extends TestCase
     public function it_tests_articles_delete(): void
     {
         /** @var Article $article */
-        $article = Article::factory()->create([
-            'author_id' => $this->user->id,
-        ]);
+        $article = Article::factory()->for($this->user, 'author')->create();
 
         $response = $this->actingAs($this->user)
             ->deleteJson(route('articles.destroy', $article));
@@ -102,9 +100,8 @@ class ArticlesTest extends TestCase
         $titleName = 'A day in life of Doe';
 
         /** @var Article $article */
-        $article = Article::factory()->create([
+        $article = Article::factory()->for($this->user, 'author')->create([
             'title' => $titleName,
-            'author_id' => $this->user->id,
         ]);
 
         $response = $this->actingAs($this->user)
@@ -118,9 +115,8 @@ class ArticlesTest extends TestCase
         );
 
         /** @var Article $article */
-        $anotherArticle = Article::factory()->create([
+        $anotherArticle = Article::factory()->for($this->user, 'author')->create([
             'title' => $titleName,
-            'author_id' => $this->user->id,
         ]);
 
         $anotherResponse = $this->actingAs($this->user)
@@ -137,9 +133,7 @@ class ArticlesTest extends TestCase
     {
         $article = Article::factory()->create();
 
-        $newData = Article::factory()->make([
-            'author_id' => $this->admin->id,
-        ]);
+        $newData = Article::factory()->for($this->user, 'author')->make();
 
         $response = $this->actingAs($this->user)
             ->putJson(route('articles.update', $article), $newData->toArray());
@@ -152,9 +146,7 @@ class ArticlesTest extends TestCase
     {
         $article = Article::factory()->create();
 
-        $newData = Article::factory()->make([
-            'author_id' => $this->admin->id,
-        ]);
+        $newData = Article::factory()->for($this->admin, 'author')->make();
 
         $response = $this->actingAs($this->user)
             ->putJson(route('articles.update', $article), $newData->toArray());
