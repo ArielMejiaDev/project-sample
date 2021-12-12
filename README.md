@@ -1,66 +1,47 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Project Sample
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Shows some very useful patterns with Laravel applications by a Blog API.
 
-## About Laravel
+## Index 🗂️
+- Commits & Patterns
+- Setup project Instructions
+- Credits
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Commits & Patterns 🤓
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Adding a macro to `TestResponse` object - [Here](https://github.com/ArielMejiaDev/project-sample/commit/1fa3c1737e923b4c6c1b09041d7937b7f509dd86)
+- Add custom properties to make tests boilerplate shorter/easier and add traits to Laravel `TestCase` - [Here](https://github.com/ArielMejiaDev/project-sample/commit/aea7ac876ad1305be1bbc11a4f46f108bb0cae55)
+- Resolve common model events with a general trait (bootable method) - [Here](https://github.com/ArielMejiaDev/project-sample/commit/57c75144d51a0ccea75a023e153ce04211ce338c)
+- Dependency Injection, Custom Service Providers and Query Objects to handle `index` requests easier - [Here](https://github.com/ArielMejiaDev/project-sample/commit/4b10d8578eed3b3d1d9e3908534258eb792d4faa)
+- Add API basic authentication & how to map new route files to keep all routes clean in `RouteServiceProvider` - [Here](https://github.com/ArielMejiaDev/project-sample/commit/4b10d8578eed3b3d1d9e3908534258eb792d4faa)
+- Refactoring namespaces & follow a convention for services, controllers, etc - [Here](https://github.com/ArielMejiaDev/project-sample/commit/4074ffadc1639d6bd25ae1cf8e3cabead24304aa)
+- Add trashed and search Eloquent model endpoint and how to test it - [Here](https://github.com/ArielMejiaDev/project-sample/commit/623d70bdb9f30c0329f35e014076fe6b311e2363)
+- Add policies to any resource controller for your Authorization logic - [Here](https://github.com/ArielMejiaDev/project-sample/commit/0cf2d0a8bb73c15742b562da09678426e2d1b418)
+- Add `Eloquent builders` to reduce `Eloquent models` size - [Here](https://github.com/ArielMejiaDev/project-sample/commit/09a458560b491f099689aeedc440a6e5c0d94675)
+- How to add a single class macro - [Here](https://github.com/ArielMejiaDev/project-sample/commit/df4b4b82284032249a92f139e1724646e1fc96a1)
+- Refactoring tests (using relationship helpers) - [Here](https://github.com/ArielMejiaDev/project-sample/commit/e94d2f43243faa257fc2a64d5cbff5f2961156c0)
+- Refactoring a Macro closure to Mixin - [Here](https://github.com/ArielMejiaDev/project-sample/commit/b61b49236775e2b474e9fc161b7a7f01b94b994e)
+- Refactoring a Mixin to single class Macro - [Here](https://github.com/ArielMejiaDev/project-sample/commit/c2366bca8fdad3d819cae77cc565258b760852fc)
+- Add new model fields workflow & register policies in `AuthServiceProvider` - [Here](https://github.com/ArielMejiaDev/project-sample/commit/1a4e2b4472a2a90b7a4e6579417ffa5878bc809e)
+- How to test timestamps - [Here](https://github.com/ArielMejiaDev/project-sample/commit/128058343b53c72545db0cf7e1c5b398703bf3dc)
+- How to use as external service, How to implement a strategy & factory patterns in Laravel to handle different "types" of outputs & add and endpoint with multiple filters - [Here](https://github.com/ArielMejiaDev/project-sample/commit/ab8311de153ec4e831e0af795323089fc717bccb)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Setup Instructions 🚀
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- You need some Development environment to work with Laravel you can use Valet or Sail.
+- Clone the project: `git clone git@github.com:ArielMejiaDev/project-sample.git`
+- Create an env file (check that you are in the root directory of the project): `cp .env.example .env`
+- Set your Database driver (it is already set for SQLite to make the project setup easier).
+- You can set a database with Mysql or SQLite to test that everything is working.
+  - The easiest way is to make a SQLite Database in your terminal:
+    ```
+    cd database
+    touch database.sqlite
+    ```
+- To test the endpoints you can use POSTMAN, here is a Postman Collection link to test it manually easier: [Here](https://www.getpostman.com/collections/b2e0f5f70be685e2970f)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Credits ⭐
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Author [ArielMejiaDev]()
+- Special thanks to all the Laravel team core members and Spatie team.
