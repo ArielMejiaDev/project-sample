@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use App\Enums\Role;
 use App\Traits\HasRoles;
 use App\Traits\Relationships\HasArticles;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;

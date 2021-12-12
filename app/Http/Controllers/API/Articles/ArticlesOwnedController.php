@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Queries\Articles\ArticlesOwnedQuery;
 use App\Http\Queries\EloquentQuery;
 use App\Http\Resources\ArticleResource;
-use App\Models\Article;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection as ArticleResourceCollection;
 

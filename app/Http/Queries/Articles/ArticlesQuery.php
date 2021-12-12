@@ -12,13 +12,11 @@ class ArticlesQuery extends QueryBuilder
     {
         parent::__construct(Article::query());
 
-        $this->allowedSorts('created_at')
-            ->allowedFilters([
-                AllowedFilter::scope(
-                    'title',
-                    'insensitiveTitleSearch'
-                )
-            ])
+        $this->allowedFilters([
+            AllowedFilter::scope('trashed'),
+            AllowedFilter::scope('published'),
+            AllowedFilter::scope('unpublished'),
+        ])
             ->with('author');
     }
 }

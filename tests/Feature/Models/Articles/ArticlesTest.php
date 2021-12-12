@@ -4,7 +4,10 @@ namespace Tests\Feature\Models\Articles;
 
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+use App\Services\Contracts\ReadingMinutesCalculatorContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Mocks\MockIpHandler;
+use Tests\Mocks\MockReadingMinutesCalculator;
 use Tests\TestCase;
 
 class ArticlesTest extends TestCase
@@ -31,12 +34,16 @@ class ArticlesTest extends TestCase
     /** @test */
     public function it_tests_articles_show(): void
     {
+        $readingMinutesMock = new MockReadingMinutesCalculator();
+
+        $this->swap(ReadingMinutesCalculatorContract::class, $readingMinutesMock);
+
         /** @var Article $article */
         $article = Article::factory()->for($this->user, 'author')->create();
 
         $response = $this->actingAs($this->user)->getJson(route('articles.show', $article));
 
-        $resource = ArticleResource::make($article->load('author'));
+        $resource = ArticleResource::make($article->addReadingMinutes($readingMinutesMock)->load('author'));
 
         $response->assertResource($resource);
     }

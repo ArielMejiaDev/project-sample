@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Builders\ArticleBuilder;
+use App\Services\Contracts\ReadingMinutesCalculatorContract;
 use App\Traits\Relationships\BelongsToAnAuthor;
 use App\Traits\SoftDeletable;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,9 @@ use Illuminate\Support\Str;
  * @property $thumbnail
  * @property $author_id
  * @property Carbon $published_at
+ * @property $author
+ * @property $published_at_for_humans
+ * @property $reading_minutes
  *
  * @method byAuthor()
  *
@@ -62,10 +66,17 @@ class Article extends Model
     {
         $publishedAt = null;
 
-        if (request()->input('published')) {
+        if (request()->input('published') || $this->isDirty('published_at')) {
             $publishedAt = now();
         }
 
         return $publishedAt;
+    }
+
+    public function addReadingMinutes(ReadingMinutesCalculatorContract $readingMinutesCalculator): Article
+    {
+        $this->attributes['reading_minutes'] = $readingMinutesCalculator
+            ->getReadingMinutes($this->attributes['content']);
+        return $this;
     }
 }

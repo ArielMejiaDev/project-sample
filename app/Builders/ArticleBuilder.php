@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Builders;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class ArticleBuilder extends Builder
@@ -25,14 +24,24 @@ class ArticleBuilder extends Builder
         });
     }
 
-    public function byAuthor(User $author): self
+    public function byAuthor($authorId): self
     {
-        return $this->where('author_id', $author->id);
+        return $this->where('author_id', $authorId);
     }
 
     public function published(): self
     {
         return $this->whereNotNull('published_at');
+    }
+
+    public function unpublished(): self
+    {
+        return $this->whereNull('published_at');
+    }
+
+    public function trashed(): self
+    {
+        return $this->onlyTrashed();
     }
 
     // Prunes

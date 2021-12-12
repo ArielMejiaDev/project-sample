@@ -7,16 +7,22 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+use App\Services\Contracts\ReadingMinutesCalculatorContract;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection as ArticleResourceCollection;
 use Illuminate\Http\Response;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ArticlesController extends Controller
 {
     protected Article $article;
+    protected ReadingMinutesCalculatorContract $readingMinutesCalculatorContract;
+    protected QueryBuilder $articlesQuery;
 
-    public function __construct(Article $article)
+    public function __construct(Article $article, ReadingMinutesCalculatorContract $readingMinutesCalculatorContract, QueryBuilder $articlesQuery)
     {
         $this->article = $article;
+        $this->readingMinutesCalculatorContract = $readingMinutesCalculatorContract;
+        $this->articlesQuery = $articlesQuery;
 
         $this->authorizeResource(Article::class, 'article', [
             'except' => [ 'index', 'show' ]
@@ -25,7 +31,10 @@ class ArticlesController extends Controller
 
     public function index(): ArticleResourceCollection
     {
-        $articles = $this->article->newQuery()->with('author')->paginate()->appends('published_at_for_humans');
+        $articles = $this->articlesQuery
+            ->paginate()
+            ->appends('published_at_for_humans');
+
         return ArticleResource::collection($articles);
     }
 
@@ -40,7 +49,10 @@ class ArticlesController extends Controller
 
     public function show(Article $article): ArticleResource
     {
-        $article->append('published_at_for_humans')->load('author');
+        $article->addReadingMinutes($this->readingMinutesCalculatorContract)
+            ->append('published_at_for_humans')
+            ->load('author');
+
         return ArticleResource::make($article);
     }
 

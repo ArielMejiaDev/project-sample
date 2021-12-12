@@ -20,8 +20,28 @@ class ArticleFactory extends Factory
         ];
     }
 
+    /** Indicate that the model's publish_at column has a timestamp.*/
+    public function published(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published_at' => now(),
+            ];
+        });
+    }
+
     /** Indicate that the model's publish_at column is null.*/
     public function unpublished(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published_at' => null,
+            ];
+        });
+    }
+
+    /** Indicate that the model's publish boolean flag is false check the Article Observer.*/
+    public function unpublishedFlag(): Factory
     {
         return $this->state(function (array $attributes) {
             return [
@@ -30,12 +50,32 @@ class ArticleFactory extends Factory
         });
     }
 
-    /** Indicate that the model's publish_at column has a timestamp value.*/
-    public function published(): Factory
+    /** Indicate that the model's publish boolean flag is true check the Article Observer.*/
+    public function publishedFlag(): Factory
     {
         return $this->state(function (array $attributes) {
             return [
                 'published' => true,
+            ];
+        });
+    }
+
+    /** Indicate that the model's content has a very large text.*/
+    public function largeText(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'content' => implode($this->faker->words(300), ','),
+            ];
+        });
+    }
+
+    /** Indicate that the model's deleted_at column has a timestamp.*/
+    public function trashed(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'deleted_at' => now(),
             ];
         });
     }

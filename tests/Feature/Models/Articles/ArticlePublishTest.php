@@ -18,7 +18,7 @@ class ArticlePublishTest extends TestCase
 
         Carbon::setTestNow($timestamp);
 
-        $articleData = Article::factory()->published()->make(['published_at' => null]);
+        $articleData = Article::factory()->publishedFlag()->make(['published_at' => null]);
 
         $response = $this->actingAs($this->user)
             ->postJson(route('articles.store'), $articleData->toArray());
@@ -50,7 +50,7 @@ class ArticlePublishTest extends TestCase
 
         $article = Article::factory()->for($this->user, 'author')->create(['published_at' => null]);
 
-        $articleData = Article::factory()->published()->make();
+        $articleData = Article::factory()->publishedFlag()->make();
 
         $response = $this->actingAs($this->user)
             ->putJson(route('articles.update', $article), $articleData->toArray());

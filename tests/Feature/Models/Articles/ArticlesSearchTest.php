@@ -4,7 +4,6 @@ namespace Tests\Feature\Models\Articles;
 
 use App\Models\Article;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ArticlesSearchTest extends TestCase
